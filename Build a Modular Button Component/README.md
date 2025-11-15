@@ -28,11 +28,11 @@ index.html
 
 **Example:**
 
- export function createButton(label, onClick) {
-  const button = document.createElement("button");
-  button.textContent = label;
-  button.addEventListener("click", onClick);
-  return button;
+ export function createButton(label, onClick) {<br>
+  const button = document.createElement("button");<br>
+  button.textContent = label;<br>
+  button.addEventListener("click", onClick);<br>
+  return button;<br>
 }
 
 3. In main.js, import the function and create three buttons:
