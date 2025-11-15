@@ -10,10 +10,10 @@ Understand how to create and use your own JavaScript modules and components.
 
 1. Create a project folder with the following structure:
 
- /js
-  /components
-    button.js
-  main.js
+ /js<br>
+  /components<br>
+    button.js<br>
+  main.js<br>
 index.html
 
 2. In button.js, create and export a function called
