@@ -1,60 +1,46 @@
-const form = document.getElementById('newsletter-form');
+const form = document.getElementById('newsletterForm');
 const nameInput = document.getElementById('name');
+const nameErrorDiv = document.getElementById('nameError');
 const emailInput = document.getElementById('email');
+const emailErrorDiv = document.getElementById('emailError');
 const feedbackDiv = document.getElementById('feedback');
 
-// form.addEventListener('submit', function(event) {
-//     event.preventDefault();
-//     feedbackDiv.innerHTML = '';
 
-//     const name = nameInput.value.trim();
-//     const email = emailInput.value.trim();
-//     let valid = true;
-
-//     if (name === '') {
-//         valid = false;
-//         const nameError = document.createElement('p');
-//         nameError.textContent = 'Name is required.';
-//         feedbackDiv.appendChild(nameError);
-//     }
-
-//     const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-//     if (!email.match(emailPattern)) {
-//         valid = false;
-//         const emailError = document.createElement('p');
-//         emailError.textContent = 'Please enter a valid email address.';
-//         feedbackDiv.appendChild(emailError);
-//     }
-
-//     if (valid) {
-//         const successMessage = document.createElement('p');
-//         successMessage.textContent = 'Form submitted successfully!';
-//         feedbackDiv.appendChild(successMessage);
-//         form.reset();
-//     }
-// }); 
-
-form.addEventListener("submit", function(event){
+// Add an event listener to the form's submit event
+form.addEventListener('submit', function(event){
+    // Prevent the default form submission (which would reload the page)
     event.preventDefault();
-    feedbackDiv.innerHTML = '';
-    const name = nameInput.value.trim();
-    const email = emailInput.value.trim();
-    let valid = true;
+    // Reset previous feedback/errors
+    feedbackDiv.style.display = 'none';
+    nameErrorDiv.textContent = '';
+    emailErrorDiv.textContent = '';
 
-    if (name === ''){
-        valid = false;
-        const nameError = document.createElement('p');
-        nameError.textContent = 'Name is required.';
-        feedbackDiv.appendChild(nameError);
-    }
+    // --- Validation Logic ---
+    let isValid = true;
+    const nameValue = nameInput.value.trim();
+    const emailValue = emailInput.value.trim();
 
-    if (valid){
-        const successMessage = document.createElement('p');
-        successMessage.textContent = 'Form submitted successfully!';
-        feedbackDiv.appendChild(successMessage);
-        form.reset();
+
+    if (nameValue === ''){
+        nameErrorDiv.textContent = 'Name can not be empty.';
+        isValid = false;
     }
-    
+    if(emailValue === ''){
+        emailErrorDiv.textContent = 'Email address can not be empty.';
+        isValid = false;
+    }
+    // Optional: A simple email format check (optional but good practice)
+    else if(!emailValue.includes('@') || !emailValue.includes('.') ){
+        emailErrorDiv.textContent ='Please enter a valid email address.';   
+        isValid = false;
+    }
+    // --- Feedback Logic ---
+    if(isValid){
+        feedbackDiv.style.display = 'block';
+        // Optional: Clear the form fields after successful registration
+        nameInput.value = '';
+        emailInput.value = '';
+    }
 
 
 })
